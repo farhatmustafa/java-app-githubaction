@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-app
-  namespace: springv2
+  namespace: default
   labels:
     app: spring
 spec:

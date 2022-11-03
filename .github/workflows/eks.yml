@@ -51,7 +51,7 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
         docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
     - name: Update kube config
-      run: aws eks --region us-east-2 update-kubeconfig --name test-cluster
+      run: aws eks --region us-east-2 update-kubeconfig --name kiran-cluster
 
     - name: Deploy image to Amazon EKS
       run: |
@@ -69,7 +69,7 @@ jobs:
         ECR_REPOSITORY: kiran-ecr
         IMAGE_TAG: ${{ github.sha }}
       with:
-        args: set image deployment/my-app spring=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -n springv2
+        args: set image deployment/my-app spring=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -n default
         
     - name: verify deployment
       uses: kodermax/kubectl-aws-eks@master
@@ -78,4 +78,4 @@ jobs:
         IAM_VERSION: "0.5.6"
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
       with:
-        args: rollout status deployment/my-app -n springv2
+        args: rollout status deployment/my-app -n default
