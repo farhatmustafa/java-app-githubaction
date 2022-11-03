@@ -51,7 +51,15 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         echo "Pushing image to ECR..."
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"   
+        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" 
+
+
+
+    - name: Deploy image to Amazon EKS
+      run: |
+        
+        kubectl apply -f eks/deployment.yml
+        kubectl apply -f eks/service.yml  
     
     - name: deploy to cluster
       uses: kodermax/kubectl-aws-eks@master
@@ -74,8 +82,4 @@ jobs:
       with:
         args: rollout status deployment/my-app -n springv1
 
-    - name: Deploy image to Amazon EKS
-      run: |
-        
-        kubectl apply -f eks/deployment.yml
-        kubectl apply -f eks/service.yml
+
