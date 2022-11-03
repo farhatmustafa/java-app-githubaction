@@ -65,11 +65,11 @@ jobs:
 
 
 
-    - name: Deploy image to Amazon EKS
-      run: |
+        #  - name: Deploy image to Amazon EKS
+        #run: |
         
-        kubectl apply -f eks/deployment.yml
-        kubectl apply -f eks/service.yml  
+        #kubectl apply -f eks/deployment.yml
+        #kubectl apply -f eks/service.yml  
     
     - name: deploy to cluster
       uses: kodermax/kubectl-aws-eks@master
