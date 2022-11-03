@@ -14,7 +14,7 @@ public class Application {
 
 	@RequestMapping("/")
 	public String home(){
-		return "Hello from spring-boot-docker-kiranv1";
+		return "Hello from spring-boot-docker-from kiran-1995:";
 	}
 
 
