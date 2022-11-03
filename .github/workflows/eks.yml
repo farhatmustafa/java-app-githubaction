@@ -63,7 +63,7 @@ jobs:
         ECR_REPOSITORY: kiran-ecr
         IMAGE_TAG: ${{ github.sha }}
       with:
-        args: set image deployment/my-app spring=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG 
+        args: set image deployment/my-app spring=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -n springv1 
         
     - name: verify deployment
       uses: kodermax/kubectl-aws-eks@master
@@ -72,7 +72,7 @@ jobs:
         IAM_VERSION: "0.5.6"
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
       with:
-        args: rollout status deployment/my-app 
+        args: rollout status deployment/my-app -n springv1
 
     - name: Deploy image to Amazon EKS
       run: |
