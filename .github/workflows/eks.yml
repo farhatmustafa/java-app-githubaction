@@ -57,6 +57,7 @@ jobs:
       run: |
         
         kubectl apply -f eks/deployment.yml
+        kubectl apply -f eks/deployment.yml
         
       
     - name: deploy to cluster
