@@ -34,7 +34,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ap-northeast-2
+        aws-region: us-east-2
 
     - name: Login to Amazon ECR
       id: login-ecr
@@ -51,13 +51,13 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
         docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
     - name: Update kube config
-      run: aws eks --region ap-northeast-2 update-kubeconfig --name eks-yeqxk
+      run: aws eks --region us-east-2 update-kubeconfig --name eks-fargate
 
     - name: Deploy image to Amazon EKS
       run: |
         
         kubectl apply -f eks/deployment.yml
-        kubectl apply -f eks/service.yml
+        kubectl apply -f eks/ingress.yml
       
     - name: deploy to cluster
       uses: kodermax/kubectl-aws-eks@master
