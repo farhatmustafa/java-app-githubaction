@@ -57,7 +57,8 @@ jobs:
       run: |
         
         kubectl apply -f eks/deployment.yml
-        kubectl apply -f eks/ingress.yml
+        kubectl apply -f eks/deployment.yml
+        
       
     - name: deploy to cluster
       uses: kodermax/kubectl-aws-eks@master
