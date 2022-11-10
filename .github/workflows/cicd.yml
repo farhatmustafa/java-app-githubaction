@@ -70,11 +70,11 @@ jobs:
     #   with:
     #     args: set image deployment/my-app spring=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -n default
         
-    - name: verify deployment
-      uses: kodermax/kubectl-aws-eks@master
-      env:
-        KUBECTL_VERSION: "v1.22.0"
-        IAM_VERSION: "0.5.6"
-        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-      with:
-        args: rollout status deployment/my-app -n stagging
+    # - name: verify deployment
+    #   uses: kodermax/kubectl-aws-eks@master
+    #   env:
+    #     KUBECTL_VERSION: "v1.22.0"
+    #     IAM_VERSION: "0.5.6"
+    #     KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+    #   with:
+    #     args: rollout status deployment/my-app -n stagging
