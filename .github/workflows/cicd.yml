@@ -54,8 +54,8 @@ jobs:
     - name: Deploy image to Amazon EKS
       run: |
         
-        kubectl apply -f eks/deployment.yml
-        kubectl apply -f eks/deployment.yml
+        kubectl apply -f k8s/deployment.yml
+        kubectl apply -f k8s/deployment.yml
         
       
     # - name: deploy to cluster
