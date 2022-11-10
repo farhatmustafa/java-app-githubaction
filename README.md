@@ -1,3 +1,3 @@
 
 sample java app to test github action 
-and deploy to eks-fargate
+and deploy to eks-fargate-cluster
