@@ -1,2 +1,2 @@
-# samplejavaapp
-samplejavaapp
+
+sample java app to test github action 
