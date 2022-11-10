@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-app
-  namespace: default
+  namespace: stagging
   labels:
     app: spring
 spec:
@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: spring
-        image: 276264299222.dkr.ecr.us-east-2.amazonaws.com/kiran-ecr:latest
+        image: 807410046616.dkr.ecr.us-east-1.amazonaws.com/java-ecr:latest
         ports:
         - containerPort: 8080
 
