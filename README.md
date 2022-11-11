@@ -1,2 +1,2 @@
 
-sample java app to test github action and deploy to eks-fargate-cluster
+sample java app to test github action and deploy to AWS-eks-fargate-cluster
