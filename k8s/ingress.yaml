@@ -1,0 +1,23 @@
+
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: my-app-ingress
+#   namespace: staging
+#   annotations:
+#     alb.ingress.kubernetes.io/scheme: internet-facing
+#     alb.ingress.kubernetes.io/target-type: ip
+# spec:
+#   ingressClassName: alb
+#   rules:
+#     - host: java-test.devopsbyexample.io #domain is not registered just specify for now to test something
+#       http:
+#         paths:
+#           - path: /
+#             pathType: Exact
+#             backend:
+#               service:
+#                 name: my-app
+#                 port:
+#                   number: 80
