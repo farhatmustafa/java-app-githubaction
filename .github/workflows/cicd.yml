@@ -60,7 +60,7 @@ jobs:
         IMAGE_TAG: ${{ github.sha }}
       run: |
          kubectl apply -f k8s/deployment.yml
-         kubectl set image deployment/my-app spring=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -n staging
+ #        kubectl set image deployment/my-app spring=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -n staging
         
       
     # - name: deploy to cluster
