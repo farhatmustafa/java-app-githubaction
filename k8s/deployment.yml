@@ -12,7 +12,6 @@ metadata:
   labels:
     app: spring
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: spring
@@ -39,6 +38,10 @@ kind: Service
 metadata:
   name: my-app
   namespace: staging
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: external
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
+    service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
 spec:
   type: LoadBalancer
   selector:
@@ -47,3 +50,40 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 8080
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: my-app-hpa
+  namespace: staging
+spec:
+  minReplicas: 1
+  maxReplicas: 3
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: my-app
+  targetCPUUtilizationPercentage: 50
+
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: my-app-ingress
+#   namespace: staging
+#   annotations:
+#     alb.ingress.kubernetes.io/scheme: internet-facing
+#     alb.ingress.kubernetes.io/target-type: ip
+# spec:
+#   ingressClassName: alb
+#   rules:
+#     - host: java-test.devopsbyexample.io #domain is not registered just specify for now to test something
+#       http:
+#         paths:
+#           - path: /
+#             pathType: Exact
+#             backend:
+#               service:
+#                 name: my-app
+#                 port:
+#                   number: 80
