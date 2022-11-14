@@ -14,7 +14,7 @@ public class Application {
 
 	@RequestMapping("/")
 	public String home(){
-		return "Hello This page is coming from github action and EKS :D";
+		return "Hello This page is coming from github action and EKS ";
 	}
 
 
