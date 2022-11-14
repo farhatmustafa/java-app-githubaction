@@ -54,10 +54,13 @@ jobs:
       run: aws eks --region us-east-1 update-kubeconfig --name eks-fargate-demo
 
     - name: Deploy image to Amazon EKS
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: java-ecr
+        IMAGE_TAG: ${{ github.sha }}
       run: |
          kubectl apply -f k8s/deployment.yml
-         kubectl rollout status deployment/my-app -n staging
-         echo "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+         kubectl set image deployment/my-app spring=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -n staging
         
       
     # - name: deploy to cluster
